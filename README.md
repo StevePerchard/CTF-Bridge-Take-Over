@@ -1,19 +1,21 @@
 <img width="581" height="110" alt="image" src="https://github.com/user-attachments/assets/1da8d246-0364-4727-b2ac-1289b20a842a" />
 
 
-# CTF-Bridge-Take-Over
+# CTF-Bridge-Take-Over Threat Hunt Report
 ---
-- Executive Summary
+## Contents
 
-- Required Action By Urgency
+- ### Executive Summary
 
-- Chronology of Attack
+- ### Required Action By Urgency
 
-- Indicators of Compromise
+- ### Chronology of Attack
 
-- Mitre Attack TTP's
+- ### Indicators of Compromise
 
-- [Flag by Flag KQL Report](https://github.com/StevePerchard/CTF-Bridge-Take-Over/blob/main/KQL%20Flag%20by%20Flag.md)
+- ### Mitre Attack TTP's
+
+- ## [Flag by Flag KQL Report](https://github.com/StevePerchard/CTF-Bridge-Take-Over/blob/main/KQL%20Flag%20by%20Flag.md)
 
 
 ---
