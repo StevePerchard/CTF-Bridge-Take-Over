@@ -13,7 +13,7 @@
 
 - Mitre Attack TTP's
 
-- Flag by Flag KQL Report
+- [Flag by Flag KQL Report](https://github.com/StevePerchard/CTF-Bridge-Take-Over/blob/main/KQL%20Flag%20by%20Flag.md)
 
 
 ---
