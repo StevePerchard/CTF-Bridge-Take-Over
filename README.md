@@ -21,7 +21,7 @@
 
 # Executive Summary – Azuki Corporation Breach (CTF 3)
 
-On 25 November 2025, the workstation **azuki-adminpc** (user: yuki.tanaka) was compromised via RDP from internal IP **10.1.0.204**. The attacker conducted a rapid, methodical post-exploitation campaign lasting approximately 2 hours.
+On 25 November 2025, the workstation **azuki-adminpc** (user: yuki.tanaka) was compromised via RDP from IP **10.1.0.204**. The attacker conducted a rapid, methodical post-exploitation campaign lasting approximately 2 hours.
 
 Key activities included:
 - Comprehensive discovery (sessions, domain trusts, network connections, credential files)
