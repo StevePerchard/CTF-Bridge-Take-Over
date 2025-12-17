@@ -49,6 +49,9 @@ DeviceProcessEvents
 // Flag 6 = "7z.exe" x C:\Windows\Temp\cache\KB5044273-x64.7z -p******** -oC:\Windows\Temp\cache\ -y
 ```
 
+<img width="1065" height="76" alt="image" src="https://github.com/user-attachments/assets/e00f1920-b41a-4db7-a3ce-b3b878645847" />
+
+
 ```
 // Flag 7
 DeviceFileEvents
@@ -59,6 +62,9 @@ DeviceFileEvents
 // flag 7 = meterpreter.exe
 ```
 
+<img width="1101" height="60" alt="image" src="https://github.com/user-attachments/assets/f23306d3-a383-4ca9-b19b-f9506b5da1ac" />
+
+
 ```
 // flag 8 
 DeviceEvents
@@ -68,6 +74,8 @@ DeviceEvents
 | project Timestamp, AdditionalFields
 // Flag 8 = \Device\NamedPipe\msf-pipe-5902
 ```
+
+<img width="1598" height="56" alt="image" src="https://github.com/user-attachments/assets/4f1bf20e-d367-4d57-be7c-2cfca69475bb" />
 
 ```
 // Flag 9 & Flag 10 & Flag 11
@@ -81,6 +89,9 @@ DeviceProcessEvents
 // Flag 11 = net localgroup Administrators yuki.tanaka2 /add
 ```
 
+<img width="1476" height="70" alt="image" src="https://github.com/user-attachments/assets/85af2150-c228-40fb-96a7-84545fb1efff" />
+
+
 ```
 // Flag 12
 DeviceProcessEvents
@@ -90,6 +101,9 @@ DeviceProcessEvents
 | project Timestamp, FileName, ProcessCommandLine, InitiatingProcessFileName, InitiatingProcessCommandLine
 // Flag 12 = qwinsta.exe
 ```
+
+<img width="1213" height="99" alt="image" src="https://github.com/user-attachments/assets/581f1f76-6914-4757-832c-219de1e7a7fe" />
+
 
 ```
 // Flag 13
@@ -101,6 +115,9 @@ DeviceProcessEvents
 // Flag 13 = "nltest.exe" /domain_trusts /all_trusts
 ```
 
+<img width="1137" height="114" alt="image" src="https://github.com/user-attachments/assets/77f6e768-c2b0-4ee8-a909-af2959104adc" />
+
+
 ```
 //Flag 14
 DeviceProcessEvents
@@ -110,6 +127,9 @@ DeviceProcessEvents
 | project Timestamp, FileName, ProcessCommandLine, InitiatingProcessFileName
 // Flag 14 = "NETSTAT.EXE" -ano
 ```
+
+<img width="1001" height="155" alt="image" src="https://github.com/user-attachments/assets/cba9063f-dfdc-4e55-bf48-1dfaf6b85cd8" />
+
 
 ```
 // Flag 15
@@ -121,6 +141,9 @@ DeviceProcessEvents
 | project Timestamp, FileName, ProcessCommandLine, InitiatingProcessFileName
 // Flag 15 = "cmd.exe" /c where /r C:\Users *.kdbx
 ```
+
+<img width="1164" height="98" alt="image" src="https://github.com/user-attachments/assets/369bc540-88a6-4a4b-be63-afdf20bc538b" />
+
 
 ```
 // Flag 16
