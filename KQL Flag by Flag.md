@@ -1,4 +1,4 @@
-###CTF-Bridge Take Over
+### CTF-Bridge Take Over
 
 ## Flag by Flag KQL & MDE Results
 
