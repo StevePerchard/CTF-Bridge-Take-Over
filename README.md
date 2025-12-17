@@ -1,10 +1,22 @@
 <img width="581" height="110" alt="image" src="https://github.com/user-attachments/assets/1da8d246-0364-4727-b2ac-1289b20a842a" />
 
 
-
-
-
 # CTF-Bridge-Take-Over
+---
+- Executive Summary
+
+- Required Action By Urgency
+
+- Chronology of Attack
+
+- Indicators of Compromise
+
+- Mitre Attack TTP's
+
+- Flag by Flag KQL Report
+
+
+---
 
 
 # Executive Summary – Azuki Corporation Breach (CTF 3)
