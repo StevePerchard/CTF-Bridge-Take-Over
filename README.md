@@ -1,4 +1,5 @@
 <img width="581" height="110" alt="image" src="https://github.com/user-attachments/assets/1da8d246-0364-4727-b2ac-1289b20a842a" />
+<img width="497" height="102" alt="image" src="https://github.com/user-attachments/assets/cfadca29-5d02-4b21-92fc-90e15738c809" />
 
 
 # CTF-Bridge-Take-Over Threat Hunt Report
